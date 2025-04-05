@@ -16,29 +16,28 @@ const compat = new FlatCompat({
 });
 
 export default defineConfig([{
+    env: {
+      'react-native/react-native': true,
+    },
     extends: compat.extends("eslint:recommended", "plugin:react/recommended"),
-
     plugins: {
-        react,
-        "react-native": reactNative,
+      react,
+      "react-native": reactNative,
     },
-
     languageOptions: {
-        globals: {
-            ...reactNative.environments["react-native"]["react-native"],
-        },
-
-        parser: babelParser,
+      globals: {
+        ...reactNative.environments["react-native"].globals,
+      },
+      parser: babelParser,
     },
-
     settings: {
-        react: {
-            version: "detect",
-        },
+      react: {
+        version: "detect",
+      },
     },
-
     rules: {
-        "react/prop-types": "off",
-        "react/react-in-jsx-scope": "off",
+      "react/prop-types": "off",
+      "react/react-in-jsx-scope": "off",
     },
-}]);
+  }]);
+  
