@@ -3,6 +3,7 @@ import { useFormik } from 'formik';
 import Text from './Text';
 import { loginFormStyle, colors } from '../theme';
 import * as yup from 'yup';
+import useSignIn from '../hooks/useSignIn';
 
 const validationSchema = yup.object().shape({
     name: yup
@@ -10,7 +11,7 @@ const validationSchema = yup.object().shape({
       .required('Username is required'),
     pwd: yup
       .string()
-      .required('Invalid or missing password'),
+      .required('Missing password'),
   });
 
 const LoginForm = ({ onSubmit }) => {
@@ -62,8 +63,16 @@ const LoginForm = ({ onSubmit }) => {
 };
 
 const SignIn = () => {
-    const onSubmit = info => {
-        console.log(info.name, info.pwd)
+    const [signIn] = useSignIn();
+    const onSubmit = async (info) => {
+        const username = info.name;
+        const password = info.pwd;
+        try {
+            const token = await signIn({ username, password });
+            console.log(token)
+          } catch (e) {
+            console.log(e);
+          }
     }
     return <LoginForm onSubmit={onSubmit} />;
 };
