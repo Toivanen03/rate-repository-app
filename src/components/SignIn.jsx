@@ -4,6 +4,8 @@ import Text from './Text';
 import { loginFormStyle, colors } from '../theme';
 import * as yup from 'yup';
 import useSignIn from '../hooks/useSignIn';
+import { useNavigate } from 'react-router-native';
+import { useState } from 'react';
 
 const validationSchema = yup.object().shape({
     name: yup
@@ -14,7 +16,7 @@ const validationSchema = yup.object().shape({
       .required('Missing password'),
   });
 
-const LoginForm = ({ onSubmit }) => {
+const LoginForm = ({ onSubmit, errorMsg }) => {
     const formik = useFormik({
         initialValues: {
             name: '',
@@ -54,7 +56,7 @@ const LoginForm = ({ onSubmit }) => {
             />
             {formik.touched.pwd && formik.errors.pwd && (
             <Text color='error'>{formik.errors.pwd}</Text>
-            )}
+            )}<Text color='error'>{errorMsg}</Text>
             <Pressable onPress={formik.handleSubmit} style={loginFormStyle.button}>
                 <Text style={loginFormStyle.button.text}>Log in</Text>
             </Pressable>
@@ -63,18 +65,23 @@ const LoginForm = ({ onSubmit }) => {
 };
 
 const SignIn = () => {
+    const navigate = useNavigate();
     const [signIn] = useSignIn();
+    const [errorMsg, setErrorMsg] = useState('');
+
     const onSubmit = async (info) => {
         const username = info.name;
         const password = info.pwd;
         try {
-            const token = await signIn({ username, password });
-            console.log(token)
-          } catch (e) {
-            console.log(e);
+            const login = await signIn({ username, password });
+            if (login) {
+                navigate('/');
+            };
+          } catch (error) {
+            setErrorMsg(error.message);
           }
     }
-    return <LoginForm onSubmit={onSubmit} />;
+    return <LoginForm onSubmit={onSubmit} errorMsg={errorMsg} />;
 };
 
 export default SignIn;
