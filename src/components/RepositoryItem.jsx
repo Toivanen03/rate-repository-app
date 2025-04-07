@@ -1,14 +1,14 @@
 import React from 'react';
-import { View, Image } from 'react-native';
+import { View, Image, Pressable } from 'react-native';
 import { data, fonts, colors } from '../theme';
 import Text from './Text';
 
-const RepositoryItem = ({ fullName, description, language, forksCount, stargazersCount, ratingAverage, reviewCount, ownerAvatarUrl }) => {
-  const count = (value) =>
-    value >= 1000 ? `${(value / 1000).toFixed(1)}k` : String(value);
+const RepositoryItem = ({ fullName, description, language, forksCount, stargazersCount, ratingAverage, reviewCount, ownerAvatarUrl, onPress }) => {
+
+  const count = (value) => value >= 1000 ? `${(value / 1000).toFixed(1)}k` : String(value);
 
   return (
-    <View style={data.container}>
+    <Pressable onPress={onPress} testID="repositoryItem" style={data.container}>
       <View style={{ flexDirection: 'row', alignItems: 'center', padding: 15 }}>
         <Image source={{ uri: ownerAvatarUrl }} style={data.avatar} />
         <View style={{ marginLeft: 15, flex: 1 }}>
@@ -36,7 +36,7 @@ const RepositoryItem = ({ fullName, description, language, forksCount, stargazer
           <Text>Rating</Text>
         </View>
       </View>
-    </View>
+    </Pressable>
   );
 };
 

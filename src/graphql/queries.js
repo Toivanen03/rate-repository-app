@@ -29,10 +29,18 @@ export const SIGN_IN = gql`
 `
 
 export const ME = gql`
-query Me {
-    me {
-        id
-        username
+    query Me {
+        me {
+            id
+            username
+        }
     }
+`
+
+export const SINGLE_REPO = gql`
+query Repo ($repositoryId: ID!) {
+  repository(id: $repositoryId) {
+    url
+  }
 }
 `

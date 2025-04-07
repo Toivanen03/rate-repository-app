@@ -24,14 +24,12 @@ const AppBar = () => {
 
   const SignInButton = () => {
     if (data?.me) {
-      console.log(data.me)
       return (
         <Pressable style={{ marginRight: 10 }} onPress={logOut}>
           <Text fontSize="subheading" color="white">Log out</Text>
         </Pressable>
       );
     } else {
-      console.log(data.me)
       return (
         <Link to="/login" style={{ marginRight: 10 }}>
           <Text fontSize="subheading" color="white">Sign in</Text>

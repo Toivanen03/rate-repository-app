@@ -44,7 +44,7 @@ export const loginFormStyle = StyleSheet.create({
     margin: 10,
     display: 'flex',
     alignItems: 'center',
-    backgroundColor: colors.primary,
+    backgroundColor: colors.white,
     text: {
       color: colors.white,
       fontSize: fonts.fontsizes.subheading,

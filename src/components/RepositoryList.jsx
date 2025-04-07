@@ -3,6 +3,7 @@ import { FlatList, View, StyleSheet } from 'react-native';
 import RepositoryItem from './RepositoryItem';
 import useRepositories from '../hooks/useRepositories';
 import Text from './Text'
+import { useNavigate } from 'react-router-native';
 
 const styles = StyleSheet.create({
   separator: {
@@ -10,10 +11,29 @@ const styles = StyleSheet.create({
   },
 });
 
+export const RepositoryListContainer = ({ repositories }) => {
+  const navigate = useNavigate();
+
+  const ItemSeparator = () => <View style={styles.separator} />;
+
+  const repositoryNodes = repositories
+    ? repositories.edges.map(edge => edge.node)
+    : [];
+
+  return (
+    <FlatList
+      data={repositoryNodes}
+      ItemSeparatorComponent={ItemSeparator}
+      renderItem={({ item }) => <RepositoryItem {...item} onPress={() => navigate(`/${item.id}`)} />}
+      keyExtractor={(item) => item.id}
+    />
+  );
+};
+
 const RepositoryList = () => {
   const { repositories, loading, error } = useRepositories();
 
-  if (loading) {
+    if (loading) {
     return <Text>Loading...</Text>;
   };
 
@@ -21,20 +41,7 @@ const RepositoryList = () => {
     return <Text>Error: {error.message}</Text>;
   };
 
-const ItemSeparator = () => <View style={styles.separator} />;
-
-const repositoryNodes = repositories
-  ? repositories.edges.map(edge => edge.node)
-  : [];
-
-  return (
-    <FlatList
-      data={repositoryNodes}
-      ItemSeparatorComponent={ItemSeparator}
-      renderItem={({ item }) => <RepositoryItem {...item} />}
-      keyExtractor={(item) => item.id}
-    />
-  );
+  return <RepositoryListContainer repositories={repositories} />;
 };
 
 export default RepositoryList;

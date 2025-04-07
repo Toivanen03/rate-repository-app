@@ -16,7 +16,7 @@ const validationSchema = yup.object().shape({
       .required('Missing password'),
   });
 
-const LoginForm = ({ onSubmit, errorMsg }) => {
+export const LoginFormContainer = ({ onSubmit, errorMsg }) => {
     const formik = useFormik({
         initialValues: {
             name: '',
@@ -81,7 +81,7 @@ const SignIn = () => {
             setErrorMsg(error.message);
           }
     }
-    return <LoginForm onSubmit={onSubmit} errorMsg={errorMsg} />;
+    return <LoginFormContainer onSubmit={onSubmit} errorMsg={errorMsg} />;
 };
 
 export default SignIn;

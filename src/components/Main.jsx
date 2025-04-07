@@ -1,5 +1,6 @@
 import { StyleSheet } from 'react-native';
 import RepositoryList from './RepositoryList';
+import RepositoryPage from './RepositoryPage';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 import { Route, Routes, Navigate } from 'react-router-native';
 import AppBar from './AppBar';
@@ -20,6 +21,7 @@ const Main = () => {
         <Routes>
           <Route path="/" element={<RepositoryList />} />
           <Route path="/login" element={<SignIn />} />
+          <Route path="/:repoId" element={<RepositoryPage />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </SafeAreaView>
