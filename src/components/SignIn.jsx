@@ -1,7 +1,7 @@
 import { TextInput, Pressable, View } from 'react-native';
 import { useFormik } from 'formik';
 import Text from './Text';
-import { loginFormStyle, colors } from '../theme';
+import { formStyle, colors } from '../theme';
 import * as yup from 'yup';
 import useSignIn from '../hooks/useSignIn';
 import { useNavigate } from 'react-router-native';
@@ -27,10 +27,10 @@ export const LoginFormContainer = ({ onSubmit, errorMsg }) => {
     });
 
     return (
-        <View style={loginFormStyle}>
+        <View style={formStyle}>
             <TextInput
                 style={[
-                    loginFormStyle.inputField,
+                    formStyle.inputField,
                     formik.errors.name && formik.touched.name && {
                         borderColor: colors.error,
                     },
@@ -42,9 +42,10 @@ export const LoginFormContainer = ({ onSubmit, errorMsg }) => {
             {formik.touched.name && formik.errors.name && (
                 <Text color='error'>{formik.errors.name}</Text>
             )}
+            
             <TextInput
             style={[
-                loginFormStyle.inputField,
+                formStyle.inputField,
                 formik.errors.pwd && formik.touched.pwd && {
                     borderColor: colors.error,
                 },
@@ -55,10 +56,11 @@ export const LoginFormContainer = ({ onSubmit, errorMsg }) => {
             onChangeText={formik.handleChange('pwd')}
             />
             {formik.touched.pwd && formik.errors.pwd && (
-            <Text color='error'>{formik.errors.pwd}</Text>
+                <Text color='error'>{formik.errors.pwd}</Text>
             )}<Text color='error'>{errorMsg}</Text>
-            <Pressable onPress={formik.handleSubmit} style={loginFormStyle.button}>
-                <Text style={loginFormStyle.button.text}>Log in</Text>
+
+            <Pressable onPress={formik.handleSubmit} style={formStyle.button}>
+                <Text style={formStyle.button.text}>Log in</Text>
             </Pressable>
         </View>
     )

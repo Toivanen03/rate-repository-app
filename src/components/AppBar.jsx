@@ -5,8 +5,10 @@ import Text from './Text';
 import { useQuery, useApolloClient } from '@apollo/client';
 import { ME } from '../graphql/queries';
 import useAuthStorage from '../hooks/useAuthStorage';
+import { useNavigate } from 'react-router-native';
 
 const AppBar = () => {
+  const navigate = useNavigate();
   const { data, loading, error } = useQuery(ME, {
     fetchPolicy: 'cache-and-network',
   });
@@ -17,6 +19,7 @@ const AppBar = () => {
   const logOut = async () => {
     await authStorage.removeAccessToken();
     await apolloClient.resetStore();
+    navigate('/');
   };
 
   if (loading) return <Text>Loading...</Text>;
@@ -25,15 +28,25 @@ const AppBar = () => {
   const SignInButton = () => {
     if (data?.me) {
       return (
-        <Pressable style={{ marginRight: 10 }} onPress={logOut}>
-          <Text fontSize="subheading" color="white">Log out</Text>
-        </Pressable>
+        <>
+          <Link to="/reviewform" style={appBarStyle.button}>
+            <Text fontSize="subheading" color="white">Create a review</Text>
+          </Link>
+          <Pressable style={appBarStyle.button} onPress={logOut}>
+            <Text fontSize="subheading" color="white">Log out</Text>
+          </Pressable>
+        </>
       );
     } else {
       return (
-        <Link to="/login" style={{ marginRight: 10 }}>
-          <Text fontSize="subheading" color="white">Sign in</Text>
-        </Link>
+        <>
+          <Link to="/login" style={appBarStyle.button}>
+            <Text fontSize="subheading" color="white">Sign in</Text>
+          </Link>
+          <Link to="/signup" style={appBarStyle.button}>
+            <Text fontSize="subheading" color="white">Sign up</Text>
+          </Link>
+        </>
       );
     }
   };

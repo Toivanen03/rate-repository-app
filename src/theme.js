@@ -13,7 +13,8 @@ export const fonts = {
   fontsizes: {
     body: 14,
     subheading: 16,
-    header: 24
+    header: 24,
+    content: 15
   },
   fonts: {
     main: Platform.select({
@@ -28,7 +29,7 @@ export const fonts = {
   },
 };
 
-export const loginFormStyle = StyleSheet.create({
+export const formStyle = StyleSheet.create({
   padding: 10,
   margin: 10,
   inputField: {
@@ -41,10 +42,11 @@ export const loginFormStyle = StyleSheet.create({
   },
   button: {
     padding: 10,
+    borderRadius: 5,
     margin: 10,
     display: 'flex',
     alignItems: 'center',
-    backgroundColor: colors.white,
+    backgroundColor: colors.primary,
     text: {
       color: colors.white,
       fontSize: fonts.fontsizes.subheading,
@@ -71,6 +73,15 @@ export const appBarStyle = StyleSheet.create({
   contentContainer: {
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  button: {
+    borderWidth: 1,
+    borderColor: colors.white,
+    borderRadius: 5,
+    marginRight: 15,
+    fontSize: fonts.fontsizes.subheading,
+    fontWeight: fonts.fontWeights.bold,
+    padding: 4
   }
 });
 
@@ -113,3 +124,49 @@ export const data = {
     fontWeight: 'bold',
   },
 };
+
+export const buttonStyle = {
+  button: {
+    backgroundColor: colors.primary,
+    padding: 10,
+    borderRadius: 5,
+    alignItems: 'center',
+  },
+  buttonText: {
+    color: colors.white,
+    fontSize: fonts.fontsizes.subheading,
+    fontWeight: fonts.fontWeights.bold,
+  },
+}
+
+export const reviewsStyle = {
+  ratingValueBorder: {
+    borderColor: colors.primary,
+    borderWidth: 3,
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  ratingValue: {
+    color: colors.primary,
+    fontWeight: fonts.fontWeights.bold,
+    fontSize: fonts.fontsizes.subheading
+  },
+  ratingContainer: {
+    padding: 5,
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    justifyContent: 'space-between',
+  },
+  content: {
+    marginLeft: '3%',
+    flex: 1
+  },
+  text: {
+    flexShrink: 1,
+    overflow: 'hidden',
+  }
+}
