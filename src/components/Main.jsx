@@ -1,7 +1,8 @@
 import { StyleSheet } from 'react-native';
 import RepositoryList from './RepositoryList';
 import RepositoryPage from './RepositoryPage';
-import ReviewForm from './ReviewForm'
+import ReviewForm from './ReviewForm';
+import MyReviews from './MyReviews';
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 import { Route, Routes, Navigate } from 'react-router-native';
 import AppBar from './AppBar';
@@ -26,6 +27,7 @@ const Main = () => {
           <Route path="/:repoId" element={<RepositoryPage />} />
           <Route path="/reviewform" element={<ReviewForm />} />
           <Route path="/signup" element={<SignUp />} />
+          <Route path="/myreviews" element={<MyReviews />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </SafeAreaView>

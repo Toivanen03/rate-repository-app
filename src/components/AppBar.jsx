@@ -32,6 +32,9 @@ const AppBar = () => {
           <Link to="/reviewform" style={appBarStyle.button}>
             <Text fontSize="subheading" color="white">Create a review</Text>
           </Link>
+          <Link to="/myreviews" style={appBarStyle.button}>
+            <Text fontSize="subheading" color="white">My reviews</Text>
+          </Link>
           <Pressable style={appBarStyle.button} onPress={logOut}>
             <Text fontSize="subheading" color="white">Log out</Text>
           </Pressable>

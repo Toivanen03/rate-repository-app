@@ -29,10 +29,26 @@ export const SIGN_IN = gql`
 `
 
 export const ME = gql`
-    query Me {
+    query Me($includeReviews: Boolean = false) {
         me {
-            id
-            username
+            reviews @include(if: $includeReviews) {
+                edges {
+                    node {
+                        id
+                        text
+                        rating
+                        createdAt
+                        repository {
+                            id
+                            fullName
+                        }
+                        user {
+                            id
+                            username
+                        }
+                    }
+                }
+            }
         }
     }
 `
@@ -81,6 +97,46 @@ export const CREATE_USER = gql`
     mutation CreateUser($user: CreateUserInput) {
         createUser(user: $user) {
             id
+        }
+    }
+`
+
+export const FILTERED_REPOS = gql`
+    query Repositories($orderBy: AllRepositoriesOrderBy, $orderDirection: OrderDirection) {
+        repositories(orderBy: $orderBy, orderDirection: $orderDirection) {
+            edges {
+                node {
+                    id
+                    fullName
+                    description
+                    language
+                    forksCount
+                    stargazersCount
+                    ratingAverage
+                    reviewCount
+                    ownerAvatarUrl
+                }
+            }
+        }
+    }
+`
+
+export const SEARCH_REPOS = gql`
+    query SearchRepos($searchKeyword: String!) {
+        repositories(searchKeyword: $searchKeyword) {
+            edges {
+                node {
+                    id
+                    fullName
+                    description
+                    language
+                    forksCount
+                    stargazersCount
+                    ratingAverage
+                    reviewCount
+                    ownerAvatarUrl
+                }
+            }
         }
     }
 `

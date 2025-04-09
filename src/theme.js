@@ -170,3 +170,32 @@ export const reviewsStyle = {
     overflow: 'hidden',
   }
 }
+
+export const menuStyle = {
+  searchBarStyle: {
+    display: 'flex',
+    alignSelf: 'center',
+    width: '100%',
+  },
+  sortStyle: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderColor: colors.primary,
+    borderWidth: 1,
+    borderBottomLeftRadius: 40,
+    borderBottomRightRadius: 40,
+  },
+  menu: {
+    display: 'flex',
+    alignSelf: 'flex-end',
+    width: '50%',
+    marginLeft: 5
+  },
+  text: {
+    fontSize: fonts.fontsizes.subheading,
+    color: colors.textSecondary,
+    fontWeight: fonts.fontWeights.normal
+  }
+}

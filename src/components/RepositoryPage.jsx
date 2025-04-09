@@ -39,7 +39,7 @@ const ReviewItem = ({ review }) => {
         <Text style={reviewsStyle.ratingValue}>{review.rating}</Text>
       </View>
       <View style={reviewsStyle.content}>
-        <Text fontWeight="bold">{review.user.username}</Text>
+        <Text fontWeight="bold">{review.user.userName}</Text>
         <Text>{date}</Text>
         <Text style={reviewsStyle.text}>{review.text}</Text>
       </View>
@@ -54,7 +54,7 @@ const RepositoryPage = () => {
   const { url, urlLoading, urlError } = useRepoUrl(); 
   const { reviews, reviewsLoading, reviewsError } = useRepoReviews();
 
-  if (repoLoading || reviewsLoading || urlLoading || !url || !reviews) {
+  if (repoLoading || reviewsLoading || urlLoading) {
     return <Text>Loading...</Text>;
   }
 
