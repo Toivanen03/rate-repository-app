@@ -1,9 +1,16 @@
-import { screen, render, within } from "@testing-library/react-native";
+import { screen, render, within, fireEvent } from "@testing-library/react-native";
 import { RepositoryListContainer } from "../components/RepositoryList";
+import { useNavigate } from 'react-router-native';
+
+jest.mock('react-router-native', () => ({ useNavigate: jest.fn() }));
 
 describe('RepositoryList', () => {
     describe('RepositoryListContainer', () => {
       it('renders repository information correctly', () => {
+
+        const navigateMock = jest.fn();
+        useNavigate.mockReturnValue(navigateMock);
+
         const repositories = {
           totalCount: 8,
           pageInfo: {
@@ -47,6 +54,7 @@ describe('RepositoryList', () => {
           ],
         };
         render(<RepositoryListContainer repositories={repositories} />);
+
         const repositoryItems = screen.getAllByTestId('repositoryItem');
         const [first, second] = repositoryItems;
 
@@ -68,6 +76,8 @@ describe('RepositoryList', () => {
         expect(secondRepo.getByText('1.8k')).toBeTruthy();
         expect(secondRepo.getByText('72')).toBeTruthy();
         expect(secondRepo.getByText('3')).toBeTruthy();
+
+        expect(navigateMock).not.toHaveBeenCalled();
       });
     });
   });

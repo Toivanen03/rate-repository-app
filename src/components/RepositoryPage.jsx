@@ -34,7 +34,7 @@ const RepositoryPage = () => {
   const repoId = useRepoId();
   const { repositories, repoLoading, repoError } = useRepositories();
   const { url, urlLoading, urlError } = useRepoUrl(); 
-  const { reviews, reviewsLoading, reviewsError } = useRepoReviews();
+  const { reviews, reviewsLoading, reviewsError, fetchMore } = useRepoReviews({first: 5});
 
   if (repoLoading || reviewsLoading || urlLoading) {
     return <Text>Loading...</Text>;
@@ -46,6 +46,10 @@ const RepositoryPage = () => {
 
   const repository = repositories.edges.map(edge => edge.node).find(r => r.id === repoId);
 
+  const onEndReach = () => {
+      fetchMore();
+  };
+
   if (!repository) return <Text>Repository not found</Text>;
 
   return (
@@ -55,8 +59,10 @@ const RepositoryPage = () => {
       renderItem={({ item }) => <ReviewItem review={item} />}
       keyExtractor={({ id }) => id}
       ListHeaderComponent={() => <RepositoryInfo repository={repository} githubUrl={url} />}
+      onEndReached={onEndReach}
+      onEndReachedThreshold={0.5}
     />
-  );
+  )
 };
 
 export default RepositoryPage;

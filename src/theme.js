@@ -168,6 +168,31 @@ export const reviewsStyle = {
   text: {
     flexShrink: 1,
     overflow: 'hidden',
+  },
+  buttonContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center',
+  },
+  button: {
+    margin: 10,
+    padding: 10,
+    width: '40%',
+    borderRadius: 5,
+    alignItems: 'center',
+  },
+}
+
+export const noReviewsStyle = {
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'center',
+  alignItems: 'center',
+  padding: 20,
+  font: {
+    fontSize: fonts.fontsizes.header,
+    textAlign: 'center',
+    color: colors.primary
   }
 }
 

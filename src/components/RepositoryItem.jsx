@@ -9,7 +9,7 @@ const RepositoryItem = ({ fullName, description, language, forksCount, stargazer
 
   return (
     <Pressable onPress={onPress} testID="repositoryItem" style={data.container}>
-      <View style={{ flexDirection: 'row', alignItems: 'center', padding: 15 }}>
+      <View style={{ flexDirection: 'row', alignItems: 'flex-start', padding: 15 }}>
         <Image source={{ uri: ownerAvatarUrl }} style={data.avatar} />
         <View style={{ marginLeft: 15, flex: 1 }}>
           <Text style={data.title} color={colors.primary}>{fullName}</Text>
