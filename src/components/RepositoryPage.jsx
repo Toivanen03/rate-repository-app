@@ -6,8 +6,8 @@ import useRepositories from '../hooks/useRepositories';
 import RepositoryItem from './RepositoryItem';
 import Text from './Text';
 import { Pressable, Linking, View, FlatList, StyleSheet } from 'react-native';
-import { formStyle, reviewsStyle, buttonStyle } from '../theme';
-import { format } from "date-fns";
+import { formStyle, buttonStyle } from '../theme';
+import ReviewItem from './ReviewItem';
 
 const styles = StyleSheet.create({
   separator: {
@@ -26,24 +26,6 @@ const RepositoryInfo = ({ repository, githubUrl }) => {
           <Text style={buttonStyle.buttonText}>Open in GitHub</Text>
         </Pressable>
       </View>
-    </>
-  );
-};
-
-const ReviewItem = ({ review }) => {
-  const date = format(new Date(review.createdAt), "dd.MM.yyyy")
-  return (
-    <>
-    <View style={reviewsStyle.ratingContainer}>
-      <View style={reviewsStyle.ratingValueBorder}>
-        <Text style={reviewsStyle.ratingValue}>{review.rating}</Text>
-      </View>
-      <View style={reviewsStyle.content}>
-        <Text fontWeight="bold">{review.user.userName}</Text>
-        <Text>{date}</Text>
-        <Text style={reviewsStyle.text}>{review.text}</Text>
-      </View>
-    </View>
     </>
   );
 };
