@@ -1,4 +1,4 @@
-import { screen, render, within, fireEvent } from "@testing-library/react-native";
+import { screen, render, within } from "@testing-library/react-native";
 import { RepositoryListContainer } from "../components/RepositoryList";
 import { useNavigate } from 'react-router-native';
 

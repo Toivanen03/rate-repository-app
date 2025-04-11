@@ -19,7 +19,7 @@ const useRepoReviews = (options) => {
         fetchMore({
           variables: {
             after: data.reviews.pageInfo.endCursor,
-            ...variables,
+            ...options,
           },
         });
       }

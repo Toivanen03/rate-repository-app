@@ -25,6 +25,7 @@ const useSignIn = () => {
         return true;
       };
     } catch (error) {
+      console.error(error.message);
       throw new Error('Invalid username or password!');
     }
   };
